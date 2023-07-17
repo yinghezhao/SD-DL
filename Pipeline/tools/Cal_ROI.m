@@ -14,7 +14,7 @@ for taski = 1:length(tasks)
                 continue;
             end
             subdir = fullfile( dir_sub, listing( j ).name );
-            dir_ROI = fullfile(subdir, 'model2', 'spmT_0001_ROI_p0001extend3.nii');
+            dir_ROI = fullfile(subdir, 'model', 'spmT_0001_ROI_p0001extend3.nii');
             nii_ROI = load_nii(dir_ROI);
             data_ROI = nii_ROI.img;
             ROI_sub = or(data_ROI , ROI_sub);

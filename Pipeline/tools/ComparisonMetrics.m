@@ -1,4 +1,4 @@
-function ComparisonMetrics(Parameter, tasks, modality )
+function ComparisonMetrics(Parameter, tasks, modality)
 subs = Parameter.subs;
 use_phy = Parameter.use_phy;
 contrast_vector = zeros(1, Parameter.TotalTimepoints);

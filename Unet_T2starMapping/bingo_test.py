@@ -155,10 +155,10 @@ def test(config):
     # Setup device
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     # ********************************************test*****************************************************#
-    temap_test = torch.Tensor(config.tes).expand(config.INPUT_H, config.INPUT_W, 3).permute(2, 0, 1) # tensor H W C -- C H W
+    temap_test = torch.Tensor(config.tes).expand(config.INPUT_H, config.INPUT_W, 3).permute(2, 0,
+                                                                                            1)  # tensor H W C -- C H W
     Normtemap_test = - temap_test
     Normtemap_test = Normtemap_test.to(device)
-
 
     with torch.no_grad():
         for i, (images, GT, image_path) in enumerate(test_batch):
@@ -166,8 +166,7 @@ def test(config):
 
             images = images.to(device)
 
-            X_pred, t2s, M0 = net(images, Normtemap_test) # B C H W
-
+            X_pred, t2s, M0 = net(images, Normtemap_test)  # B C H W
 
             OUT_test_t2s = t2s.permute(0, 2, 3, 1).cpu().detach().numpy()  # B C H W -- B H W C
             # save t2s data to mat file
@@ -207,25 +206,32 @@ if __name__ == '__main__':
     config.model_num = '300'
     config.name = 'Unet_t2s_rician_3p'
     config.result_type = 't2s'
-    taskname = 'fingerTapping'
-    fn_all = '/DATA2023/zyh/train_Normed_MEEPI_AR/' + taskname + '/'
-    res_root = '/DATA2023/zyh/trained_AR/' + taskname + '/' + config.name + '/'
-    if not os.path.exists(res_root):
-        os.mkdir(res_root)
-    config.data_dir = fn_all
+    tasknames = ['fingerTapping', 'rest_run-1', 'rest_run-2']
+    average = True
 
-    fn_list = os.listdir(fn_all)
-    print(fn_list)
+    for taskname in tasknames:
+        if average:
+            fn_all = os.path.join('/DATA2023', 'zyh', 'train_Normed_MEEPI_AR', 'average', taskname)
+            res_root = os.path.join('/DATA2023', 'zyh', 'trained_AR', 'average',taskname, config.name)
+        else:
+            fn_all = os.path.join('/DATA2023', 'zyh', 'train_Normed_MEEPI_AR', taskname)
+            res_root = os.path.join('/DATA2023', 'zyh', 'trained_AR', taskname, config.name)
+        if not os.path.exists(res_root):
+            os.mkdir(res_root)
+        config.data_dir = fn_all
 
-    for fn_sub in fn_list:
-        dir_sub = os.path.join(fn_all, fn_sub)
-        result_sub = os.path.join(res_root, fn_sub)
-        config.test_dir = dir_sub
-        config.result_path = result_sub
-        if not os.path.exists(result_sub):
-            os.mkdir(result_sub)
-        print(dir_sub)
-        print(result_sub)
-        test(config)
-        Reshape2D(result_sub, res_root, config.result_type, config.INPUT_H, config.INPUT_W, config.INPUT_D)
-    print('Finished all!')
+        fn_list = os.listdir(fn_all)
+        print(fn_list)
+
+        for fn_sub in fn_list:
+            dir_sub = os.path.join(fn_all, fn_sub)
+            result_sub = os.path.join(res_root, fn_sub)
+            config.test_dir = dir_sub
+            config.result_path = result_sub
+            if not os.path.exists(result_sub):
+                os.mkdir(result_sub)
+            print(dir_sub)
+            print(result_sub)
+            test(config)
+            Reshape2D(result_sub, res_root, config.result_type, config.INPUT_H, config.INPUT_W, config.INPUT_D)
+        print('Finished all!')
