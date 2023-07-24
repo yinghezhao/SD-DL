@@ -18,9 +18,9 @@ run_matlabbatch = 1;
 CopyFiles(Parameter, tasks_all);
 Preprocess_SR_3echoes(Parameter, tasks_all, run_matlabbatch);
 
-PreProcess_TAPTAS_physio(Parameter, task_states,run_matlabbatch);
+PreProcess_TAPAS_physio(Parameter, task_states,run_matlabbatch);
 % ---------------------------------
-PreProcess_R2analyse_echo2(Parameter, tasks_all, run_matlabbatch);
+% PreProcess_R2analyse_echo2(Parameter, tasks_all, run_matlabbatch);  %不用做了
 
 Echo22Mask(Parameter,task_states);
 

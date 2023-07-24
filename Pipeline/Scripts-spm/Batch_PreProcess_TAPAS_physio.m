@@ -1,4 +1,4 @@
-function matlabbatch = Batch_PreProcess_TAPTAS_physio(save_dir, file_physio)
+function matlabbatch = Batch_PreProcess_TAPAS_physio(save_dir, file_physio)
 matlabbatch{1}.spm.tools.physio.save_dir = {save_dir};
 matlabbatch{1}.spm.tools.physio.log_files.vendor = 'BIDS';
 matlabbatch{1}.spm.tools.physio.log_files.cardiac = {file_physio};

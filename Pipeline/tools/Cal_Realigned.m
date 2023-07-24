@@ -17,7 +17,7 @@ for taski = 1:length(tasks)
         end
         [Ni, Nj, Nk, Nt, ~] = size(func_Realigned);
         for j = 1:length(modality)
-            dir_mod = [dir_sub modality{j}];
+            dir_mod = fullfile(dir_sub, modality{j});
             if ~exist(dir_mod)
                 mkdir(dir_mod)
             end
