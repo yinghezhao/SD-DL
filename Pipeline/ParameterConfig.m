@@ -4,6 +4,8 @@ Parameter.dir_root = '/DATA2023/zyh/rs-me-fMRI-test/';  % direction where you wa
 Parameter.dir_model_source = '/DATA2023/zyh/trained_AR/'; % direction where you save Unet t2star mapping results
 Parameter.dir_result = '/data2/zyh/Results/rs-me-fMRI-results/'; % direction where you want save comparison matrix results.
 Parameter.dir_Normed = '/DATA2023/zyh/train_Normed_AR_test/'; % direction where you save the file transferred to the Unet t2star mapping model.
+Parameter.dir_DPABI = '/DATA2023/zyh/rs-me-fMRI-DPABI/'; % direction where you save dpabi processing data and results.
+Parameter.dir_Template = '/data2/zyh/CODE/SDM-DL/dependences/Template/';
 Parameter.subs = {'001','002','003','004','005','006','007','010','011','013','015','016','017','018','019','020','021','022','023','024','025','026','027','029','030','031','032'};
 
 Parameter.TR = 2;

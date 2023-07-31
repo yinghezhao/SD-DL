@@ -20,6 +20,7 @@ The pre-processing codes have been tested in MATLAB R2018a.
 - [tedana](https://tedana.readthedocs.io/en/stable/index.html) v0.0.12
 - spm12
 - DPABI
+- TAPAS
 - [ROCKETSHIP](https://github.com/petmri/ROEKETSHIP)
 
 ## Pipeline
