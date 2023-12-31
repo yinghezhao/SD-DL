@@ -2,8 +2,8 @@ import os
 import shutil
 import os
 
-dir_DatasetNorm = '/data2/zyh/CODE/t2star_fitting_sup/dataset_norm'
-dir_template = '/data2/zyh/template/MESignal_t2s_Norm_Rayleigh_sup_3p'
+dir_DatasetNorm = '/data2/zyh/CODE/t2star_fitting_sup/dataset_norm_1'
+dir_template = '/data2/zyh/template/NewSupNormMESignal_t2s_rtme_Clean'
 
 dir_DN_train = dir_DatasetNorm + '/train'
 dir_DN_test = dir_DatasetNorm + '/test'

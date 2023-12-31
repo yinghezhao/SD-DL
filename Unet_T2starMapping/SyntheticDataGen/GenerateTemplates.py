@@ -4,7 +4,6 @@ import scipy.io as scio
 import random
 
 def GenerateNormedTemplate_t2s(dir_root, dir_destination, TE_value, sigma=0.01, noise_type='rician', rand = False):
-
     for filepath, dirnames, filenames in os.walk(dir_root):
         for filename in filenames:
             dir_mat = os.path.join(filepath, filename)
@@ -13,7 +12,6 @@ def GenerateNormedTemplate_t2s(dir_root, dir_destination, TE_value, sigma=0.01, 
             M0 = Templatedata[:, :, 0]
             t2s = Templatedata[:, :, 1]
             max_M0 = M0.max()
-            # print("Max of M0 is :", max_M0)
 
             echos = len(TE_value)
             [Nx, Ny] = t2s.shape
@@ -24,29 +22,35 @@ def GenerateNormedTemplate_t2s(dir_root, dir_destination, TE_value, sigma=0.01, 
             Template[np.isinf(Template)] = 0
             Template[Template > max_M0] = 0
             Template[Template < 0] = 0
+
+            # Normalise Template
+            max_S1 = Template[:, :, 0].max()
+            Template_Norm = Template / max_S1
+
+            # add Noise to Normed Template
             if rand == True:
                 sigma = random.uniform(0, sigma)
             if noise_type == 'rayleigh':
                 if sigma != 0:
                     # add noise to Template
-                    noise = np.random.rayleigh(sigma * max_M0, size=Template.shape)
+                    noise = np.random.rayleigh(sigma, size=Template_Norm.shape)
                 else:
-                    noise = np.zeros(Template.shape)
-                Template_withNoise = Template + noise
+                    noise = np.zeros(Template_Norm.shape)
+                Template_withNoise = Template_Norm + noise
             elif noise_type == 'rician':
-                x = sigma * max_M0 * np.random.randn(*Template.shape) + Template
-                y = sigma * max_M0 * np.random.randn(*Template.shape)
+                x = sigma * np.random.randn(*Template_Norm.shape) + Template_Norm
+                y = sigma * np.random.randn(*Template_Norm.shape)
                 Template_withNoise = np.sqrt(x ** 2 + y ** 2)
-            # Normalise Template_withNoise
-            max_S1 = Template_withNoise[:, :, 0].max()
-            Template_withNoise = Template_withNoise / max_S1
+
+            # create simulation samples
             save_data[:, :, 0:echos] = Template_withNoise
             save_data[:, :, echos:echos + 1] = t2s.reshape(64, 64, 1)
-            save_data[:, :, echos+1:echos + 2] = M0.reshape(64, 64, 1) / max_S1
+            save_data[:, :, echos + 1:echos + 2] = M0.reshape(64, 64, 1) / max_S1
 
             filenum = filename.split("_")[-1].split(".")[0]
             template_name = 'NormedMESignal_' + str(filenum) + '.mat'
             save_template_name = os.path.join(dir_destination, template_name)
+
             # save Template as mat file
             label = {"NormedSignal": save_data}
             scio.savemat(save_template_name, label)
