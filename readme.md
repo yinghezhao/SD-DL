@@ -1,12 +1,12 @@
-# Synthetic Data-driven Multi-echo Deep Learning(SDM-DL)
+# Synthetic Data-driven Deep Learning(SD-DL)
 
-Example codes for multi-echo fMRI $T_{2}^{*}$ mapping using SDM-DL.
+Example codes for multi-echo fMRI $T_{2}^{*}$ mapping using SD-DL.
 
 **Author**: Yinghe Zhao (33320211150273@stu.xmu.edu.cn)
 
 **Table of Conents**
 
-- [Synthetic Data-driven Multi-echo Deep Learning(SDM-DL)](#synthetic-data-driven-multi-echo-deep-learningsdm-dl)
+- [Synthetic Data-driven Deep Learning(SDM-DL)](#synthetic-data-driven-multi-echo-deep-learningsdm-dl)
   - [Dependencies](#dependencies)
   - [Pipeline](#pipeline)
   - [Unet\_T2starMapping](#unet_t2starmapping)
