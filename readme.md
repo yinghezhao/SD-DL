@@ -6,7 +6,7 @@ Example codes for multi-echo fMRI $T_{2}^{*}$ mapping using SD-DL.
 
 **Table of Conents**
 
-- [Synthetic Data-driven Deep Learning(SD-DL)](#synthetic-data-driven-multi-echo-deep-learningsdm-dl)
+- [Synthetic Data-driven Deep Learning(SD-DL)](#synthetic-data-driven-deep-learningsd-dl)
   - [Dependencies](#dependencies)
   - [Pipeline](#pipeline)
   - [Unet\_T2starMapping](#unet_t2starmapping)
